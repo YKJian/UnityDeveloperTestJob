@@ -6,6 +6,8 @@
 # TODO file
 TODO_RUS.txt
 
+.vsconfig
+
 .utmp/
 /[Ll]ibrary/
 /[Tt]emp/
