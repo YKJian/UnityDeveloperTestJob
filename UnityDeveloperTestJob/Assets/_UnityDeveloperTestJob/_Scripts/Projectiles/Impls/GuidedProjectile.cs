@@ -56,7 +56,7 @@ namespace Projectiles.Impls
             Vector3 targetCenter = m_targetCollider.bounds.center;
             Vector3 direction = (targetCenter - transform.position).normalized;
 
-            transform.Translate(direction * m_speed);
+            transform.Translate(direction * m_speed * Time.deltaTime);
         }
     }
 }
