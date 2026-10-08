@@ -46,11 +46,11 @@ namespace Utils
             }
             else if (time1 < time2)
             {
-                return time2;
+                return time1;
             }
             else
             {
-                return time1;
+                return time2;
             }
         }
     }
