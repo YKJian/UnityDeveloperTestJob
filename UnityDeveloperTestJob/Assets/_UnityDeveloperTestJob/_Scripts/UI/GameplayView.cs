@@ -20,8 +20,8 @@ namespace UI
 
         private void OnDisable()
         {
-            m_createTowerButton.onClick.AddListener(OnTowerClicked);
-            m_createWeaponButton.onClick.AddListener(OnWeaponClicked);
+            m_createTowerButton.onClick.RemoveListener(OnTowerClicked);
+            m_createWeaponButton.onClick.RemoveListener(OnWeaponClicked);
         }
 
         private void OnTowerClicked() =>
