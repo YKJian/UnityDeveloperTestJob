@@ -14,7 +14,7 @@ namespace Utils
 
             Vector3 distance = interceptorPosition - targetPosition;
             float b = 2 * targetVelocity.magnitude * distance.magnitude
-                * Mathf.Cos(Vector3.Angle(distance, targetVelocity));
+                * Mathf.Cos(Vector3.Angle(distance, targetVelocity) * Mathf.Deg2Rad);
 
             float c = -distance.sqrMagnitude;
 
