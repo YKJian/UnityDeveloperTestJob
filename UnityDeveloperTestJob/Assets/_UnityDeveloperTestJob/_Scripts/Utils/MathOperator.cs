@@ -20,7 +20,7 @@ namespace Utils
 
             float d = (b * b) - (4 * a * c);
 
-            if (d < 0f || a == 0f)
+            if (d < 0f || Mathf.Approximately(a, 0f))
             {
                 return 0f;
             }
