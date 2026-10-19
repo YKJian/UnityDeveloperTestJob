@@ -34,7 +34,7 @@ namespace CreationSystem.Impls
 
         public override IPlaceable Create()
         {
-            PlacementSlot slot = GetSlot(m_towerSlots) as PlacementSlot;
+            PlacementSlot slot = GetUnoccupiedSlot(m_towerSlots) as PlacementSlot;
 
             if (slot == null)
             {

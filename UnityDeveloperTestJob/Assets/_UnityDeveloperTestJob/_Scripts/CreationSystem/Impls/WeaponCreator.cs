@@ -39,7 +39,7 @@ namespace CreationSystem.Impls
 
         public override IPlaceable Create()
         {
-            Tower tower = GetSlot(m_towerCreator.GetActiveTowers()) as Tower;
+            Tower tower = GetUnoccupiedSlot(m_towerCreator.GetActiveTowers()) as Tower;
 
             if (tower == null)
             {

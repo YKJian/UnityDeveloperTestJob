@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UI;
 
@@ -10,26 +10,21 @@ namespace CreationSystem
 
         public abstract IPlaceable Create();
 
-        protected ISlot GetSlot(ISlot[] collection)
+        protected ISlot GetUnoccupiedSlot(ISlot[] slots) 
         {
-            ISlot[] unoccupiedSlots = GetUnoccupiedSlots(collection);
-            int length = unoccupiedSlots.Length;
+            List<ISlot> unoccupiedSlots = new List<ISlot>();
 
-            if (length == 0)
+            foreach (ISlot slot in slots)
             {
-                return null;
+                if (!slot.isOccupied)
+                {
+                    unoccupiedSlots.Add(slot);
+                }
             }
-            else
-            {
-                return unoccupiedSlots[Random.Range(0, length)];
-            }
-        }
 
-        private ISlot[] GetUnoccupiedSlots(ISlot[] objects)
-        {
-            return objects
-            .Where(x => !x.isOccupied)
-            .ToArray();
+            return unoccupiedSlots.Count == 0 
+                ? null 
+                : unoccupiedSlots[Random.Range(0, unoccupiedSlots.Count)];
         }
     }
 }
