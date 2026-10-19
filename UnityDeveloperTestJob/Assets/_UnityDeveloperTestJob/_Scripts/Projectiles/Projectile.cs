@@ -8,7 +8,7 @@ namespace Projectiles
     [RequireComponent(typeof(Rigidbody))]
     public abstract class Projectile : Subject, IProjectile
     {
-        [SerializeField] private Rigidbody m_rigidbody;
+        [SerializeField] protected Rigidbody m_rigidbody;
 
         public Rigidbody rb => m_rigidbody;
         
@@ -21,8 +21,6 @@ namespace Projectiles
 
         public virtual void Initialize(ProjectileData projectileData)
         {
-            m_rigidbody.linearVelocity = Vector3.zero;
-
             m_damage = projectileData.damage;
         }
 
