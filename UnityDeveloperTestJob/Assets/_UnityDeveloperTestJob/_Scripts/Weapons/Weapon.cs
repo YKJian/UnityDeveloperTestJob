@@ -49,7 +49,7 @@ namespace Weapons
                 return;
             }
 
-            m_target = m_tower.GetTarget(m_targetLayer);
+            m_target = m_tower.GetClosestTarget(m_targetLayer);
 
             if (m_target == null)
             {
