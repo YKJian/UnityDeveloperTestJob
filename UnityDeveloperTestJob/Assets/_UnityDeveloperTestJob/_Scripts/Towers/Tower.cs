@@ -1,5 +1,4 @@
 ﻿using CreationSystem;
-using System.Linq;
 using UnityEngine;
 using Entities;
 
@@ -7,28 +6,36 @@ namespace Towers
 {
     public class Tower : MonoBehaviour, ISlot, IPlaceable
     {
+        private const int MaxTargets = 10;
+
         [Header("Tower settings")]
         [SerializeField][Min(0)] private float m_range = 10f;
 
         public bool isOccupied { get; set; } = false;
 
-        public Entity GetTarget(LayerMask targetLayer) => 
-            ClosestTarget(FindTargets(targetLayer));
+        private Collider[] m_hits = new Collider[MaxTargets];
 
-        private Entity[] FindTargets(LayerMask targetLayer)
+        public Entity GetClosestTarget(LayerMask targetLayer)
         {
-            Entity[] targets = Physics.OverlapSphere(transform.position, m_range, targetLayer)
-                .Select(x => x.GetComponent<Entity>())
-                .ToArray();
+            Entity target = null;
 
-            return targets;
-        }
+            float minSqrDistance = Mathf.Infinity;
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, m_range, m_hits, targetLayer);
+            
+            for (int i = 0; i < hitCount; i++)
+            {
+                if (m_hits[i].TryGetComponent(out Entity entity))
+                {
+                    float sqrDistance = (entity.transform.position - transform.position).sqrMagnitude;
+                    if (sqrDistance < minSqrDistance)
+                    {
+                        minSqrDistance = sqrDistance;
+                        target = entity;
+                    }
+                }
+            }
 
-        private Entity ClosestTarget(Entity[] targets)
-        {
-            return targets
-                .OrderBy(x => (x.transform.position - transform.position).sqrMagnitude)
-                .FirstOrDefault();
+            return target;
         }
     }
 }
