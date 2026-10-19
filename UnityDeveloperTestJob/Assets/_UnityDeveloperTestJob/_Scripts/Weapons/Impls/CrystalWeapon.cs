@@ -16,7 +16,7 @@ namespace Weapons.Impls
 
         protected override void LaunchProjectile(Projectile projectile)
         {
-            GuidedProjectile guidedProjectile = projectile as GuidedProjectile;
+            GuidedProjectile guidedProjectile = (projectile as GuidedProjectile) ?? new GuidedProjectile();
 
             guidedProjectile.SetTarget(m_target.gameObject);
         }
