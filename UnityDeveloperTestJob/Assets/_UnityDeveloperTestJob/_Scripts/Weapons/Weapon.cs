@@ -44,11 +44,6 @@ namespace Weapons
 
         private void Update()
         {
-            if (!CanShoot())
-            {
-                return;
-            }
-
             m_target = m_tower.GetClosestTarget(m_targetLayer);
 
             if (m_target == null)
@@ -75,9 +70,6 @@ namespace Weapons
 
             m_projectilesPool.Release(projectile);
         }
-
-        protected virtual bool CanShoot() =>
-            m_projectileData.projectile != null;
 
         protected virtual void Shoot()
         {

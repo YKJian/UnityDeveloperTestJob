@@ -17,9 +17,6 @@ namespace Weapons.Impls
 
         private float m_initialProjectileSpeed;
 
-        protected override bool CanShoot() =>
-            base.CanShoot() && m_shootPoint != null;
-
         protected override void ConfigureProjectile()
         {
             m_initialProjectileSpeed = ShootForce / m_projectilePrefab.rb.mass;
