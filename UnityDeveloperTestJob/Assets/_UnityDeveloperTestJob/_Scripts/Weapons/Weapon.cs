@@ -56,9 +56,7 @@ namespace Weapons
                 return;
             }
 
-            Aim(m_target);
-
-            if (m_cooldownTimer > 0)
+            if (!IsAimed(m_target) || m_cooldownTimer > 0)
             {
                 m_cooldownTimer -= Time.deltaTime;
                 return;
@@ -78,10 +76,8 @@ namespace Weapons
             m_projectilesPool.Release(projectile);
         }
 
-        protected virtual bool CanShoot()
-        {
-            return m_projectileData.projectile != null;
-        }
+        protected virtual bool CanShoot() =>
+            m_projectileData.projectile != null;
 
         protected virtual void Shoot()
         {
@@ -94,7 +90,7 @@ namespace Weapons
             LaunchProjectile(projectile);
         }
 
-        protected virtual void Aim(Entity target) { }
+        protected virtual bool IsAimed(Entity target) => true;
 
         protected abstract void ConfigureProjectile();
 

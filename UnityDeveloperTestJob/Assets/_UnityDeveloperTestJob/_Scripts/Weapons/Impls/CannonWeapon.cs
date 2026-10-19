@@ -12,14 +12,13 @@ namespace Weapons.Impls
 
         [SerializeField] private GameObject m_cannon;
         [SerializeField] private Transform m_shootPoint;
-        [SerializeField][Min(0)] private float m_rotationSpeed = 1f;
+        [SerializeField][Min(0)] private float m_rotationSpeed = 5f;
+        [SerializeField][Min(0)] private float m_aimOffset = 1f;
 
         private float m_initialProjectileSpeed;
 
-        protected override bool CanShoot()
-        {
-            return base.CanShoot() && m_shootPoint != null;
-        }
+        protected override bool CanShoot() =>
+            base.CanShoot() && m_shootPoint != null;
 
         protected override void ConfigureProjectile()
         {
@@ -29,7 +28,7 @@ namespace Weapons.Impls
             m_projectileRotation = m_shootPoint.rotation;
         }
 
-        protected override void Aim(Entity target)
+        protected override bool IsAimed(Entity target)
         {
             Vector3 targetPosition = target.transform.position;
 
@@ -60,6 +59,8 @@ namespace Weapons.Impls
                 transform.rotation,
                 newRotation,
                 Time.deltaTime * m_rotationSpeed);
+
+            return Quaternion.Angle(transform.rotation, newRotation) < m_aimOffset;
         }
 
         protected override void LaunchProjectile(Projectile projectile)
