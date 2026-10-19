@@ -78,9 +78,10 @@ namespace Weapons
             m_projectilesPool.Release(projectile);
         }
 
-        protected virtual bool CanShoot() => 
-            m_projectileData.projectile != null;
-
+        protected virtual bool CanShoot()
+        {
+            return m_projectileData.projectile != null;
+        }
 
         protected virtual void Shoot()
         {

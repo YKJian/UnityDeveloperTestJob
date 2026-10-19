@@ -6,7 +6,7 @@ namespace Entities.Enemies
     [RequireComponent(typeof(NavMeshAgent))]
 	public abstract class GuidedEnemy : Entity
     {
-        private const float m_reachDistance = 0.3f;
+        private const float ReachDistance = 0.3f;
 
         [Header("Movement settings")]
         [SerializeField][Min(0)] private float m_speed = 0.1f;
@@ -39,7 +39,7 @@ namespace Entities.Enemies
 
             m_agent.SetDestination(m_moveTarget.transform.position);
 
-            if (!m_agent.pathPending && m_agent.remainingDistance <= m_reachDistance)
+            if (!m_agent.pathPending && m_agent.remainingDistance <= ReachDistance)
 			{
                 OnDied(new DeathEventArgs(this));
                 return;

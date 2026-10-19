@@ -8,7 +8,7 @@ namespace Weapons.Impls
 {
 	public sealed class CannonWeapon : Weapon
     {
-        private const float m_shootForce = 50f;
+        private const float ShootForce = 50f;
 
         [SerializeField] private GameObject m_cannon;
         [SerializeField] private Transform m_shootPoint;
@@ -16,12 +16,14 @@ namespace Weapons.Impls
 
         private float m_initialProjectileSpeed;
 
-        protected override bool CanShoot() => 
-            base.CanShoot() && m_shootPoint != null;
+        protected override bool CanShoot()
+        {
+            return base.CanShoot() && m_shootPoint != null;
+        }
 
         protected override void ConfigureProjectile()
         {
-            m_initialProjectileSpeed = m_shootForce / m_projectilePrefab.rb.mass;
+            m_initialProjectileSpeed = ShootForce / m_projectilePrefab.rb.mass;
 
             m_projectilePosition = m_shootPoint.position;
             m_projectileRotation = m_shootPoint.rotation;
@@ -65,7 +67,7 @@ namespace Weapons.Impls
             Rigidbody projectileRigidbody = projectile.rb;
 
             projectileRigidbody.AddForce(
-                m_cannon.transform.forward * m_shootForce,
+                m_cannon.transform.forward * ShootForce,
                 ForceMode.Impulse);
         }
     }
