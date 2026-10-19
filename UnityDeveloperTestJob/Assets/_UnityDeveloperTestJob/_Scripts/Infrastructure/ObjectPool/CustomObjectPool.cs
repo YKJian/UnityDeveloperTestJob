@@ -77,6 +77,6 @@ namespace Infrastructure.ObjectPool
         }
 
         private void OnDestroy(T obj) =>
-            Object.Destroy(obj);
+            Object.Destroy(obj.gameObject);
     }
 }
