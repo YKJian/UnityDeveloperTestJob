@@ -14,13 +14,13 @@ namespace Utils
 
             Vector3 distance = interceptorPosition - targetPosition;
             float b = 2 * targetVelocity.magnitude * distance.magnitude
-                * Mathf.Cos(Vector3.Angle(distance, targetVelocity));
+                * Mathf.Cos(Vector3.Angle(distance, targetVelocity) * Mathf.Deg2Rad);
 
             float c = -distance.sqrMagnitude;
 
             float d = (b * b) - (4 * a * c);
 
-            if (d < 0f || a == 0f)
+            if (d < 0f || Mathf.Approximately(a, 0f))
             {
                 return 0f;
             }
@@ -46,11 +46,11 @@ namespace Utils
             }
             else if (time1 < time2)
             {
-                return time2;
+                return time1;
             }
             else
             {
-                return time1;
+                return time2;
             }
         }
     }
